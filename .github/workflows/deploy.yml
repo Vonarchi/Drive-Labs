@@ -2,6 +2,9 @@ name: Deploy
 on:
   push:
     branches: [main]
+  # Never run on PRs from forks
+  pull_request:
+    types: []
 permissions:
   contents: read
   id-token: write     # for OIDC
@@ -10,6 +13,8 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    # Only run on main branch pushes, never on PRs
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     steps:
       - uses: actions/checkout@v4
       - name: Enable Corepack

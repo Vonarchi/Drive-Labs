@@ -27,3 +27,6 @@ jobs:
         run: pnpm build
       - name: Test
         run: pnpm test -- --reporter=junit
+      - name: Skip steps requiring secrets on forks
+        if: ${{ github.event.pull_request.head.repo.fork == true }}
+        run: echo "Fork PR detected: skipping secret-dependent steps."
