@@ -1,0 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Semantic surface tokens */
+    --bg: 0 0% 100%;
+    --fg: 240 10% 3.9%;
+    --muted: 240 4.8% 95.9%;
+    --ring: 240 5.9% 10%;
+    
+    /* Brand scale */
+    --brand: 240 5.9% 10%;
+    --brand-50: 240 4.8% 95.9%;
+    --brand-100: 240 5.9% 90%;
+    --brand-600: 240 5.9% 10%;
+    --brand-700: 240 5.9% 5%;
+    
+    /* Status colors */
+    --danger: 0 84.2% 60.2%;
+    --warning: 38 92% 50%;
+    --success: 142 76% 36%;
+  }
+
+  .dark {
+    /* Dark mode semantic surface tokens */
+    --bg: 240 10% 3.9%;
+    --fg: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+    
+    /* Dark mode brand scale */
+    --brand: 0 0% 98%;
+    --brand-50: 240 10% 3.9%;
+    --brand-100: 240 3.7% 15.9%;
+    --brand-600: 0 0% 98%;
+    --brand-700: 0 0% 100%;
+    
+    /* Dark mode status colors */
+    --danger: 0 62.8% 30.6%;
+    --warning: 38 92% 50%;
+    --success: 142 76% 36%;
+  }
+}
+
+@layer components {
+  /* Focus ring utility */
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2;
+  }
+  
+  /* Button base styles */
+  .btn {
+    @apply inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-ring disabled:opacity-50 disabled:pointer-events-none;
+  }
+  
+  .btn-primary {
+    @apply btn bg-brand text-brand-50 hover:bg-brand-600;
+  }
+  
+  .btn-secondary {
+    @apply btn bg-muted text-fg hover:bg-muted/80;
+  }
+  
+  .btn-danger {
+    @apply btn bg-danger text-white hover:bg-danger/90;
+  }
+}
