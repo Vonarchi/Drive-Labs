@@ -1,0 +1,54 @@
+name: Deploy
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'supabase/functions/**'
+      - 'supabase/migrations/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  deploy_supabase:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Install Supabase CLI
+        run: |
+          wget -O supabase.deb https://github.com/supabase/cli/releases/download/v1.176.2/supabase_1.176.2_linux_amd64.deb
+          sudo dpkg -i supabase.deb
+          
+      - name: Deploy migrations
+        run: supabase db push
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+          
+      - name: Deploy Edge Functions
+        run: |
+          supabase functions deploy get-jobs
+          supabase functions deploy get-job-events
+          supabase functions deploy get-artifacts
+          supabase functions deploy get-pipeline-status
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+
+  deploy_vercel:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: deploy_supabase
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Deploy to Vercel
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.ORG_ID }}
+          vercel-project-id: ${{ secrets.PROJECT_ID }}
+          working-directory: ./
