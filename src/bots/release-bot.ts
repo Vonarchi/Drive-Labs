@@ -1,7 +1,7 @@
-import { DriveBot, BotContext, BotOutput } from "../types/bot.js";
+import type { DriveBot, BotContext, BotOutput } from "../types/bot";
 import path from "node:path";
 import fs from "node:fs";
-import { makeZip } from "../utils/zip.js";
+import { makeZip } from "../utils/zip";
 
 export const ReleaseBot: DriveBot = {
   name: "ReleaseBot",

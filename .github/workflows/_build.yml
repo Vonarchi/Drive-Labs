@@ -1,0 +1,61 @@
+name: Build
+on:
+  workflow_call:
+    inputs:
+      node-version:
+        description: 'Node.js version'
+        required: false
+        type: string
+        default: '20'
+      cache-key:
+        description: 'Cache key for pnpm'
+        required: false
+        type: string
+        default: 'pnpm-lock.yaml'
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          
+      - name: Enable Corepack
+        run: corepack enable
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ inputs.node-version }}
+          cache: 'pnpm'
+          
+      - name: Verify pnpm-lock.yaml
+        run: |
+          if [ ! -f "pnpm-lock.yaml" ]; then
+            echo "❌ pnpm-lock.yaml is missing"
+            exit 1
+          fi
+          echo "✅ pnpm-lock.yaml found"
+          
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+        
+      - name: Lint
+        run: pnpm lint
+        
+      - name: Type check
+        run: pnpm build
+        
+      - name: Verify build output
+        run: |
+          if [ ! -d "dist" ] || [ -z "$(ls -A dist)" ]; then
+            echo "❌ Build output is missing or empty"
+            exit 1
+          fi
+          echo "✅ Build output verified"

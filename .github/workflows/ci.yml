@@ -1,32 +1,56 @@
 name: CI
 on:
   push:
-    branches: [main]
+    branches: [main, develop]
   pull_request:
+    branches: [main, develop]
+
 permissions:
   contents: read
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
+
 jobs:
-  build_test:
+  build:
+    uses: ./.github/workflows/_build.yml
+    with:
+      node-version: '20'
+      
+  test:
+    uses: ./.github/workflows/_test.yml
+    with:
+      node-version: '20'
+      test-command: 'test'
+    needs: build
+    
+  security-scan:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+        
       - name: Enable Corepack
         run: corepack enable
-      - name: Setup Node
+        
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'pnpm'
-      - name: Install deps
+          
+      - name: Install dependencies
         run: pnpm install --frozen-lockfile
-      - name: Build
-        run: pnpm build
-      - name: Test
-        run: pnpm test -- --reporter=junit
-      - name: Skip steps requiring secrets on forks
-        if: ${{ github.event.pull_request.head.repo.fork == true }}
-        run: echo "Fork PR detected: skipping secret-dependent steps."
+        
+      - name: Security audit
+        run: pnpm audit --audit-level moderate
+        
+      - name: Check for secrets
+        run: |
+          if grep -r "password\|secret\|key\|token" --include="*.ts" --include="*.js" --include="*.json" src/ | grep -v "process.env"; then
+            echo "❌ Potential hardcoded secrets found"
+            exit 1
+          fi
+          echo "✅ No hardcoded secrets detected"

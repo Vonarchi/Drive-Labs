@@ -2,28 +2,27 @@ name: Deploy
 on:
   push:
     branches: [main]
-  # Never run on PRs from forks
-  pull_request:
-    types: []
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Deployment environment'
+        required: true
+        default: 'production'
+        type: choice
+        options:
+          - staging
+          - production
+
 permissions:
   contents: read
-  id-token: write     # for OIDC
-  deployments: write  # only if needed
+  # Shipwright justification: Required for deployment operations
+  id-token: write
+  deployments: write
+
 jobs:
   deploy:
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
-    # Only run on main branch pushes, never on PRs
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    steps:
-      - uses: actions/checkout@v4
-      - name: Enable Corepack
-        run: corepack enable
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'pnpm'
-      - run: pnpm install --frozen-lockfile
-      # example: Vercel OIDC or Cloud provider OIDC step here
-      - name: Deploy
-        run: pnpm deploy   # your script; Shipwright will wire OIDC creds
+    uses: ./.github/workflows/_deploy.yml
+    with:
+      environment: ${{ github.event.inputs.environment || 'production' }}
+      node-version: '20'
+    secrets: inherit

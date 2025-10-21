@@ -1,4 +1,4 @@
-import { DriveBot, BotOutput } from "../types/bot.js";
+import type { DriveBot, BotOutput } from "../types/bot";
 
 export const QABot: DriveBot = {
   name: "QABot",
