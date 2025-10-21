@@ -1,0 +1,49 @@
+# Shipwright configuration for OIDC authentication
+# This file configures how Shipwright handles OIDC tokens for deployments
+
+providers:
+  # Vercel OIDC configuration
+  vercel:
+    type: oidc
+    issuer: https://vercel.com
+    audience: vercel
+    role-claim: sub
+    
+  # AWS OIDC configuration
+  aws:
+    type: oidc
+    issuer: https://token.actions.githubusercontent.com
+    audience: sts.amazonaws.com
+    role-claim: sub
+    
+  # Google Cloud OIDC configuration
+  gcp:
+    type: oidc
+    issuer: https://accounts.google.com
+    audience: //iam.googleapis.com/projects/PROJECT_NUMBER/locations/global/workloadIdentityPools/POOL_ID/providers/PROVIDER_ID
+    role-claim: sub
+
+# Deployment configuration
+deploy:
+  # Build step
+  build:
+    command: pnpm build
+    
+  # Database migrations
+  database:
+    command: supabase db push
+    
+  # Edge Functions deployment
+  functions:
+    command: supabase functions deploy --no-verify-jwt
+    
+  # Frontend deployment (if applicable)
+  frontend:
+    command: pnpm deploy:frontend
+
+# Environment variables that will be automatically injected
+env:
+  - GITHUB_TOKEN
+  - SUPABASE_URL
+  - SUPABASE_ANON_KEY
+  - SUPABASE_SERVICE_ROLE_KEY

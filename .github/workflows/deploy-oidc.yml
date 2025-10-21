@@ -1,0 +1,68 @@
+name: Deploy with OIDC
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write     # for OIDC
+  deployments: write  # for deployment status
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Enable Corepack
+        run: corepack enable
+        
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+          
+      - run: pnpm install --frozen-lockfile
+      
+      # Install Supabase CLI
+      - name: Install Supabase CLI
+        run: |
+          wget -O supabase.deb https://github.com/supabase/cli/releases/download/v1.176.2/supabase_1.176.2_linux_amd64.deb
+          sudo dpkg -i supabase.deb
+          
+      # Example: Vercel OIDC Authentication
+      - name: Authenticate with Vercel
+        uses: vercel/action@v1
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          working-directory: ./
+          
+      # Example: AWS OIDC Authentication (if using AWS)
+      # - name: Configure AWS credentials
+      #   uses: aws-actions/configure-aws-credentials@v4
+      #   with:
+      #     role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+      #     aws-region: us-east-1
+      
+      # Example: Google Cloud OIDC Authentication (if using GCP)
+      # - name: Authenticate to Google Cloud
+      #   uses: google-github-actions/auth@v2
+      #   with:
+      #     credentials_json: ${{ secrets.GCP_SA_KEY }}
+      
+      # Deploy using pnpm script
+      - name: Deploy
+        run: pnpm deploy
+        env:
+          # OIDC token will be automatically available
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+      # Optional: Post-deployment verification
+      - name: Verify deployment
+        run: |
+          echo "Deployment completed successfully"
+          # Add health checks or smoke tests here

@@ -1,25 +1,41 @@
 {
-  "name": "drive-labs",
-  "type": "module",
+  "name": "drive-labs-orchestrator",
+  "version": "1.0.0",
   "private": true,
+  "type": "commonjs",
+  "engines": { "node": ">=20" },
   "scripts": {
-    "dev": "ts-node src/server.ts",
-    "build": "tsc -p .",
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc",
     "start": "node dist/server.js",
-    "typecheck": "tsc -p . --noEmit"
+    "lint": "eslint .",
+    "test:ping": "curl -s http://localhost:3000/health || true",
+    "test:run": "curl -s -X POST http://localhost:3000/pipeline/run -H 'content-type: application/json' -d '{\"projectSpec\":{\"name\":\"labs-demo\"}}' || true",
+    "deploy": "pnpm build && supabase db push && supabase functions deploy --no-verify-jwt",
+    "pnpm:dev": "pnpm dev",
+    "pnpm:build": "pnpm build",
+    "pnpm:start": "pnpm start",
+    "pnpm:test:ping": "pnpm run test:ping",
+    "pnpm:test:run": "pnpm run test:run"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.76.0",
     "archiver": "^6.0.2",
+    "dotenv": "^16.4.5",
     "eta": "^3.5.0",
     "express": "^4.19.2",
+    "tslib": "^2.6.2",
     "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/archiver": "^6.0.3",
     "@types/express": "^4.17.21",
-    "@types/node": "^20.11.30",
+    "@types/node": "^20.12.12",
     "ts-node": "^10.9.2",
-    "typescript": "^5.4.5"
+    "tsx": "^4.19.0",
+    "typescript": "^5.5.4",
+    "eslint": "^9.9.0",
+    "@typescript-eslint/eslint-plugin": "^8.0.1",
+    "@typescript-eslint/parser": "^8.0.1"
   }
 }
