@@ -1,0 +1,14 @@
+{
+  "name": "CreamCode",
+  "goal": "Generate production-grade web apps from structured specs.",
+  "stack": { "frontend": "Next.js 14", "backend": "Node", "db": "Supabase" },
+  "features": [
+    "Project wizard (form → spec.json)",
+    "Template catalog (Next.js + Tailwind + shadcn)",
+    "Renderer (ETA) → zip artifact",
+    "Auth (Supabase) + saved projects",
+    "Download + Deploy to Vercel",
+    "Audit log + billing hooks"
+  ],
+  "brandProfile": "modern-comfy"
+}

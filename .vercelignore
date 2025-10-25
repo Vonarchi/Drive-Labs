@@ -1,0 +1,8 @@
+dist/
+src/
+templates/
+tmp/
+test-*
+*.zip
+node_modules/
+.next/

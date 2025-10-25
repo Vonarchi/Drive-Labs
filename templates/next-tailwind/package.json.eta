@@ -1,0 +1,35 @@
+{
+  "name": "<%= nameParam %>",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"<% if (features.includes("auth")) { %>,
+    "db:push": "supabase db push",
+    "db:reset": "supabase db reset"<% } %>
+  },
+  "dependencies": {
+    "next": "14.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tailwindcss": "^3.4.0",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.32"<% if (features.includes("auth")) { %>,
+    "@supabase/supabase-js": "^2.38.0"<% } %><% if (features.includes("stripe")) { %>,
+    "stripe": "^14.0.0"<% } %><% if (features.includes("forms")) { %>,
+    "react-hook-form": "^7.47.0",
+    "@hookform/resolvers": "^3.3.0",
+    "zod": "^3.22.0"<% } %><% if (features.includes("email")) { %>,
+    "nodemailer": "^6.9.0"<% } %>
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "eslint": "^8.0.0",
+    "eslint-config-next": "14.0.0",
+    "typescript": "^5.0.0"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "name": "<%= kebab(name) %>",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"<% if (hasFeature(features, "auth")) { %>,
+    "db:push": "supabase db push",
+    "db:reset": "supabase db reset"<% } %>
+  },
+  "dependencies": {
+    "next": "14.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"<% if (stack === "next-tailwind") { %>,
+    "tailwindcss": "^3.4.0",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.32"<% } %><% if (stack === "next-shadcn") { %>,
+    "tailwindcss": "^3.4.0",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.32",
+    "@radix-ui/react-slot": "^1.0.0",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.0.0",
+    "tailwind-merge": "^2.0.0"<% } %><% if (hasFeature(features, "auth")) { %>,
+    "@supabase/supabase-js": "^2.38.0"<% } %><% if (hasFeature(features, "stripe")) { %>,
+    "stripe": "^14.0.0"<% } %><% if (hasFeature(features, "forms")) { %>,
+    "react-hook-form": "^7.47.0",
+    "@hookform/resolvers": "^3.3.0",
+    "zod": "^3.22.0"<% } %><% if (hasFeature(features, "email")) { %>,
+    "nodemailer": "^6.9.0"<% } %>
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "eslint": "^8.0.0",
+    "eslint-config-next": "14.0.0",
+    "typescript": "^5.0.0"<% if (stack === "next-tailwind" || stack === "next-shadcn") { %>,
+    "tailwindcss": "^3.4.0"<% } %>
+  }
+}

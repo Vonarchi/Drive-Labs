@@ -1,0 +1,60 @@
+export default function HomePage() {
+  return (
+    <main className="container mx-auto px-4 py-8">
+      <h1 className="text-4xl font-bold text-center mb-8">
+        Welcome to <%= Name %>
+      </h1>
+      
+      <p className="text-lg text-center text-gray-600 mb-8">
+        <%= description || `A modern Next.js application with Tailwind CSS built with Drive Labs` %>
+      </p>
+
+<% if (features.includes("auth")) { %>
+      <div className="max-w-md mx-auto">
+        <h2 className="text-2xl font-semibold mb-4">Authentication</h2>
+        <p className="text-gray-600 mb-4">
+          Sign in or create an account to get started.
+        </p>
+        <div className="space-y-2">
+          <button className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
+            Sign In
+          </button>
+          <button className="w-full border border-gray-300 py-2 px-4 rounded hover:bg-gray-50">
+            Sign Up
+          </button>
+        </div>
+      </div>
+<% } %>
+
+<% if (features.includes("forms")) { %>
+      <div className="max-w-md mx-auto mt-8">
+        <h2 className="text-2xl font-semibold mb-4">Contact Form</h2>
+        <form className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium mb-1">Name</label>
+            <input className="w-full border border-gray-300 rounded px-3 py-2" type="text" />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">Email</label>
+            <input className="w-full border border-gray-300 rounded px-3 py-2" type="email" />
+          </div>
+          <button className="w-full bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600" type="submit">
+            Submit
+          </button>
+        </form>
+      </div>
+<% } %>
+
+      <div className="mt-12 text-center">
+        <h2 className="text-2xl font-semibold mb-4">Features</h2>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+<% for (const feature of features) { %>
+          <div className="p-4 border rounded-lg">
+            <h3 className="font-semibold"><%= feature.charAt(0).toUpperCase() + feature.slice(1) %></h3>
+          </div>
+<% } %>
+        </div>
+      </div>
+    </main>
+  )
+}

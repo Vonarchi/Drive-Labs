@@ -1,0 +1,30 @@
+import type { Metadata } from 'next'
+import './globals.css'
+
+export const metadata: Metadata = {
+  title: '<%= Name %>',
+  description: '<%= description || `A modern Next.js application with Tailwind CSS` %>',
+<% if (features.includes("seo")) { %>
+  keywords: ['<%= features.join("', '") %>'],
+  authors: [{ name: 'Drive Labs' }],
+  openGraph: {
+    title: '<%= Name %>',
+    description: '<%= description || `A modern Next.js application with Tailwind CSS` %>',
+    type: 'website',
+  },
+<% } %>
+}
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <html lang="en">
+      <body className="min-h-screen bg-background font-sans antialiased">
+        {children}
+      </body>
+    </html>
+  )
+}

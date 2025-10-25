@@ -1,0 +1,39 @@
+{
+  "name": "<%= it.nameParam %>",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"<% if (it.features.includes("auth")) { %>,
+    "db:push": "supabase db push",
+    "db:reset": "supabase db reset"<% } %>
+  },
+  "dependencies": {
+    "next": "14.2.5",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "tailwindcss": "^3.4.0",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.32",
+    "@radix-ui/react-slot": "^1.0.2",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.0.0",
+    "tailwind-merge": "^2.0.0",
+    "lucide-react": "^0.263.1"<% if (it.features.includes("auth")) { %>,
+    "@supabase/supabase-js": "^2.38.0"<% } %><% if (it.features.includes("stripe")) { %>,
+    "stripe": "^14.0.0"<% } %><% if (it.features.includes("forms")) { %>,
+    "react-hook-form": "^7.47.0",
+    "@hookform/resolvers": "^3.3.0",
+    "zod": "^3.22.0"<% } %>
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "eslint": "^8.0.0",
+    "eslint-config-next": "14.0.0",
+    "typescript": "^5.0.0"
+  }
+}

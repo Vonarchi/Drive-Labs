@@ -2,7 +2,11 @@ import type { Config } from 'tailwindcss'
 
 export default {
   darkMode: ['class'],
-  content: ['src/**/*.{ts,tsx}'],
+  content: [
+    "./src/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+    "./app/**/*.{js,ts,jsx,tsx}",
+  ],
   theme: {
     extend: {
       borderRadius: {
@@ -27,7 +31,13 @@ export default {
         },
         danger: 'hsl(var(--danger))',
         warning: 'hsl(var(--warning))',
-        success: 'hsl(var(--success))'
+        success: 'hsl(var(--success))',
+        // high contrast variants for accessibility
+        'fg-high-contrast': 'hsl(var(--fg-high-contrast))',
+        'muted-high-contrast': 'hsl(var(--muted-high-contrast))',
+        'brand-high-contrast': 'hsl(var(--brand-high-contrast))',
+        'danger-high-contrast': 'hsl(var(--danger-high-contrast))',
+        'success-high-contrast': 'hsl(var(--success-high-contrast))'
       },
       spacing: {
         // 4pt base + comfy steps

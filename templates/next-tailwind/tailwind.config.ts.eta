@@ -1,0 +1,31 @@
+import type { Config } from 'tailwindcss'
+
+const config: Config = {
+  content: [
+    './pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
+  ],
+  theme: {
+    extend: {
+      colors: {
+        background: 'hsl(var(--background))',
+        foreground: 'hsl(var(--foreground))',
+        primary: {
+          DEFAULT: '<%= theme.primary || "hsl(222.2 84% 4.9%)" %>',
+          foreground: 'hsl(210 40% 98%)',
+        },
+        secondary: {
+          DEFAULT: 'hsl(210 40% 96%)',
+          foreground: 'hsl(222.2 84% 4.9%)',
+        },
+        accent: {
+          DEFAULT: '<%= theme.accent || "hsl(210 40% 96%)" %>',
+          foreground: 'hsl(222.2 84% 4.9%)',
+        },
+      },
+    },
+  },
+  plugins: [],
+}
+export default config

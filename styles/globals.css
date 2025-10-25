@@ -1,0 +1,29 @@
+@import './theme.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  /* Focus ring utility */
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2;
+  }
+  
+  /* Button base styles */
+  .btn {
+    @apply inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-ring disabled:opacity-50 disabled:pointer-events-none;
+  }
+  
+  .btn-primary {
+    @apply btn bg-brand text-brand-50 hover:bg-brand-600;
+  }
+  
+  .btn-secondary {
+    @apply btn bg-muted text-fg hover:bg-muted/80;
+  }
+  
+  .btn-danger {
+    @apply btn bg-danger text-white hover:bg-danger/90;
+  }
+}

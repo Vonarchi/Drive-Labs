@@ -1,48 +1,9 @@
-name: Deploy
-on:
-  workflow_call:
-    inputs:
-      environment:
-        description: 'Deployment environment'
-        required: true
-        type: string
-      node-version:
-        description: 'Node.js version'
-        required: false
-        type: string
-        default: '20'
-
-permissions:
-  contents: read
-  # Shipwright justification: Required for deployment operations
-  id-token: write
-  deployments: write
-
+name: _deploy
+on: { workflow_call: {} }
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
-    environment: ${{ inputs.environment }}
+    permissions: { contents: read, id-token: write }
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        
-      - name: Enable Corepack
-        run: corepack enable
-        
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ inputs.node-version }}
-          cache: 'pnpm'
-          
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-        
-      - name: Build
-        run: pnpm build
-        
-      - name: Deploy
-        run: pnpm deploy
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v4
+      - run: echo "Deploy here (Vercel/Fly/Render) via OIDC"

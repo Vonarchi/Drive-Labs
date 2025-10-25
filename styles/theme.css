@@ -1,0 +1,41 @@
+:root {
+  --bg: 0 0% 100%;
+  --fg: 224 71% 4%;
+  --muted: 220 14% 96%;
+  --ring: 220 90% 56%;
+  --brand: 220 90% 56%;
+  --brand-50: 214 95% 93%;
+  --brand-100: 212 96% 89%;
+  --brand-600: 221 83% 53%;
+  --brand-700: 224 76% 48%;
+  --danger: 0 84% 60%;
+  --warning: 42 95% 55%;
+  --success: 142 71% 45%;
+  /* High contrast variants for accessibility */
+  --fg-high-contrast: 224 71% 2%;
+  --muted-high-contrast: 220 14% 94%;
+  --brand-high-contrast: 220 90% 50%;
+  --danger-high-contrast: 0 84% 55%;
+  --success-high-contrast: 142 71% 40%;
+}
+
+.dark {
+  --bg: 224 71% 4%;
+  --fg: 210 20% 98%;
+  --muted: 224 14% 12%;
+  --ring: 210 90% 60%;
+  --brand: 210 90% 60%;
+  --brand-50: 215 28% 17%;
+  --brand-100: 216 20% 23%;
+  --brand-600: 210 90% 56%;
+  --brand-700: 210 90% 52%;
+  --danger: 0 85% 62%;
+  --warning: 42 96% 60%;
+  --success: 142 72% 47%;
+  /* High contrast variants for dark mode */
+  --fg-high-contrast: 210 20% 100%;
+  --muted-high-contrast: 224 14% 10%;
+  --brand-high-contrast: 210 90% 65%;
+  --danger-high-contrast: 0 85% 67%;
+  --success-high-contrast: 142 72% 52%;
+}

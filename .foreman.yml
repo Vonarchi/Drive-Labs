@@ -1,0 +1,28 @@
+project:
+  name: labs-demo
+  stack: nextjs14-react18
+  auth: supabase
+  brandProfile: modern-comfy
+
+stages:
+  - blueprint
+  - app
+  - ui
+  - copy
+  - qa
+  - cicd
+  - deploy
+
+bots:
+  orchestrator: http://localhost:3000/pipeline/run
+  blueprint:    supabase/migrations
+  app:          src
+  ui:           src/components/ui
+  copy:         supabase/seed/pro_prompts.sql
+  qa:           tests
+  cicd:         .github/workflows
+
+quality:
+  lighthouseMin: 0.90
+  coverageMin:   0.80
+  nodeVersion:   "20"

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drive Labs Design System Demo</title>
+    <link rel="stylesheet" href="../dist/styles.css">
+    <style>
+        /* Import theme variables for direct CSS usage */
+        @import url('../src/styles/theme.css');
+    </style>
+</head>
+<body class="bg-bg text-fg">
+    <div class="min-h-screen p-8">
+        <div class="max-w-4xl mx-auto space-y-8">
+            <!-- Header -->
+            <header class="text-center space-y-4">
+                <h1 class="text-3xl font-bold text-fg">Drive Labs Design System</h1>
+                <p class="text-muted text-lg">Built with Tailwind CSS and custom design tokens</p>
+            </header>
+
+            <!-- Color Palette -->
+            <section class="space-y-4">
+                <h2 class="text-2xl font-semibold">Color Palette</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="space-y-2">
+                        <div class="h-16 rounded-md bg-brand"></div>
+                        <p class="text-sm text-muted">Brand</p>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="h-16 rounded-md bg-brand-50"></div>
+                        <p class="text-sm text-muted">Brand 50</p>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="h-16 rounded-md bg-brand-100"></div>
+                        <p class="text-sm text-muted">Brand 100</p>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="h-16 rounded-md bg-brand-600"></div>
+                        <p class="text-sm text-muted">Brand 600</p>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="h-16 rounded-md bg-brand-700"></div>
+                        <p class="text-sm text-muted">Brand 700</p>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="h-16 rounded-md bg-danger"></div>
+                        <p class="text-sm text-muted">Danger</p>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="h-16 rounded-md bg-warning"></div>
+                        <p class="text-sm text-muted">Warning</p>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="h-16 rounded-md bg-success"></div>
+                        <p class="text-sm text-muted">Success</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Buttons -->
+            <section class="space-y-4">
+                <h2 class="text-2xl font-semibold">Button Components</h2>
+                <div class="flex flex-wrap gap-4">
+                    <button class="btn btn-primary px-6 py-2">Primary Button</button>
+                    <button class="btn btn-secondary px-6 py-2">Secondary Button</button>
+                    <button class="btn btn-danger px-6 py-2">Danger Button</button>
+                    <button class="btn btn-primary px-6 py-2" disabled>Disabled Button</button>
+                </div>
+            </section>
+
+            <!-- Cards -->
+            <section class="space-y-4">
+                <h2 class="text-2xl font-semibold">Card Components</h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-muted rounded-xl p-6 space-y-4">
+                        <h3 class="text-xl font-semibold">Project Card</h3>
+                        <p class="text-muted">This is a sample project card using the muted background and proper spacing.</p>
+                        <div class="flex gap-2">
+                            <button class="btn btn-primary px-4 py-2 text-sm">View</button>
+                            <button class="btn btn-secondary px-4 py-2 text-sm">Edit</button>
+                        </div>
+                    </div>
+                    <div class="bg-muted rounded-xl p-6 space-y-4">
+                        <h3 class="text-xl font-semibold">Pipeline Status</h3>
+                        <div class="space-y-2">
+                            <div class="flex items-center gap-2">
+                                <div class="w-2 h-2 bg-success rounded-full"></div>
+                                <span class="text-sm">UI/UX Bot: Complete</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <div class="w-2 h-2 bg-warning rounded-full"></div>
+                                <span class="text-sm">SecOps Bot: In Progress</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <div class="w-2 h-2 bg-muted rounded-full"></div>
+                                <span class="text-sm">QA Bot: Pending</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Typography -->
+            <section class="space-y-4">
+                <h2 class="text-2xl font-semibold">Typography Scale</h2>
+                <div class="space-y-2">
+                    <h1 class="text-3xl font-bold">Heading 1 (3xl)</h1>
+                    <h2 class="text-2xl font-semibold">Heading 2 (2xl)</h2>
+                    <h3 class="text-xl font-semibold">Heading 3 (xl)</h3>
+                    <h4 class="text-lg font-medium">Heading 4 (lg)</h4>
+                    <p class="text-base">Body text (base)</p>
+                    <p class="text-sm text-muted">Small text (sm)</p>
+                    <p class="text-xs text-muted">Extra small text (xs)</p>
+                </div>
+            </section>
+
+            <!-- Spacing Demo -->
+            <section class="space-y-4">
+                <h2 class="text-2xl font-semibold">Spacing System</h2>
+                <div class="space-y-2">
+                    <div class="bg-brand-50 p-1 rounded">p-1 (4px)</div>
+                    <div class="bg-brand-50 p-2 rounded">p-2 (8px)</div>
+                    <div class="bg-brand-50 p-3 rounded">p-3 (12px)</div>
+                    <div class="bg-brand-50 p-4 rounded">p-4 (16px)</div>
+                    <div class="bg-brand-50 p-6 rounded">p-6 (24px)</div>
+                    <div class="bg-brand-50 p-8 rounded">p-8 (32px)</div>
+                </div>
+            </section>
+
+            <!-- Dark Mode Toggle -->
+            <section class="space-y-4">
+                <h2 class="text-2xl font-semibold">Dark Mode</h2>
+                <button 
+                    onclick="document.documentElement.classList.toggle('dark')"
+                    class="btn btn-secondary px-6 py-2"
+                >
+                    Toggle Dark Mode
+                </button>
+                <p class="text-sm text-muted">Click the button above to see the dark mode theme in action.</p>
+            </section>
+        </div>
+    </div>
+</body>
+</html>

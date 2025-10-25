@@ -2,27 +2,8 @@ name: Deploy
 on:
   push:
     branches: [main]
-  workflow_dispatch:
-    inputs:
-      environment:
-        description: 'Deployment environment'
-        required: true
-        default: 'production'
-        type: choice
-        options:
-          - staging
-          - production
-
-permissions:
-  contents: read
-  # Shipwright justification: Required for deployment operations
-  id-token: write
-  deployments: write
-
+permissions: { contents: read, id-token: write }
 jobs:
   deploy:
     uses: ./.github/workflows/_deploy.yml
-    with:
-      environment: ${{ github.event.inputs.environment || 'production' }}
-      node-version: '20'
     secrets: inherit

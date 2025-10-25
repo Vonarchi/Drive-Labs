@@ -1,0 +1,35 @@
+import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
+import './globals.css'
+
+const inter = Inter({ subsets: ['latin'] })
+
+export const metadata: Metadata = {
+  title: '<%= it.Name %>',
+  description: '<%= it.description || "A beautiful Next.js application with shadcn/ui" %>',
+<% if (it.features.includes("seo")) { %>
+  keywords: ['<%= it.features.join("', '") %>'],
+  authors: [{ name: 'Drive Labs' }],
+  openGraph: {
+    title: '<%= it.Name %>',
+    description: '<%= it.description || "A beautiful Next.js application with shadcn/ui" %>',
+    type: 'website',
+  },
+<% } %>
+}
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <html lang="en">
+      <body className={inter.className}>
+        <div className="min-h-screen bg-background font-sans antialiased">
+          {children}
+        </div>
+      </body>
+    </html>
+  )
+}

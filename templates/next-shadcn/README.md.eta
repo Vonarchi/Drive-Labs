@@ -1,0 +1,201 @@
+# <%= it.Name %>
+
+<%= it.description || "A stunning Next.js application built with shadcn/ui components" %>
+
+## ✨ Features
+
+<% for (const feature of it.features) { %>- **<%= feature.charAt(0).toUpperCase() + feature.slice(1) %>** - <%= feature === "auth" ? "Secure authentication with Supabase" : 
+    feature === "forms" ? "Beautiful forms with validation" :
+    feature === "seo" ? "Search engine optimization" :
+    feature === "stripe" ? "Payment processing" :
+    `${feature} functionality` %>
+<% } %>
+
+## 🚀 Tech Stack
+
+- **Framework**: Next.js 14 with App Router
+- **Styling**: Tailwind CSS + shadcn/ui
+- **Components**: Radix UI primitives
+- **Icons**: Lucide React
+- **Fonts**: Inter (Google Fonts)
+<% if (it.features.includes("auth")) { %>- **Authentication**: Supabase<% } %>
+<% if (it.features.includes("stripe")) { %>- **Payments**: Stripe<% } %>
+<% if (it.features.includes("forms")) { %>- **Forms**: React Hook Form + Zod<% } %>
+
+## 🎨 Design System
+
+This template includes a complete design system with:
+
+- **Color Palette**: Carefully crafted color scheme with dark mode support
+- **Typography**: Inter font with proper sizing and spacing
+- **Components**: Pre-built shadcn/ui components
+- **Layout**: Responsive grid system
+- **Animations**: Smooth transitions and hover effects
+
+## 🛠️ Getting Started
+
+1. **Install dependencies**:
+   ```bash
+   npm install
+   # or
+   pnpm install
+   # or
+   yarn install
+   ```
+
+2. **Run the development server**:
+   ```bash
+   npm run dev
+   # or
+   pnpm dev
+   # or
+   yarn dev
+   ```
+
+3. **Open your browser**:
+   Navigate to [http://localhost:3000](http://localhost:3000)
+
+## 📁 Project Structure
+
+```
+<%= it.nameParam %>/
+├── app/
+│   ├── globals.css          # Global styles with CSS variables
+│   ├── layout.tsx           # Root layout with Inter font
+│   └── page.tsx             # Homepage with all sections
+├── components/
+│   └── ui/                  # shadcn/ui components
+│       ├── button.tsx
+│       ├── card.tsx
+│       ├── input.tsx
+│       ├── label.tsx
+│       ├── textarea.tsx
+│       ├── badge.tsx
+│       ├── checkbox.tsx
+│       └── tabs.tsx
+├── lib/
+│   └── utils.ts             # Utility functions
+├── package.json
+├── tailwind.config.ts       # Tailwind configuration
+├── tsconfig.json
+└── next.config.js
+```
+
+## 🎯 Key Sections
+
+### Hero Section
+- Gradient text effect
+- Call-to-action buttons
+- Badge with sparkle icon
+
+### Features Section
+- Grid layout with cards
+- Icon integration with Lucide React
+- Hover effects and animations
+
+### Authentication Section
+- Clean login/signup forms
+- Supabase integration ready
+- Form validation
+
+### Contact Forms
+- Tabbed interface
+- Multiple form types
+- Professional styling
+
+### Stats Section
+- Gradient background
+- Key metrics display
+- Responsive grid
+
+### CTA Section
+- Dark theme
+- Multiple action buttons
+- Compelling copy
+
+## 🔧 Customization
+
+### Colors
+The color scheme is defined in `app/globals.css` using CSS variables:
+
+```css
+:root {
+  --primary: 221.2 83.2% 53.3%;
+  --secondary: 210 40% 96%;
+  /* ... more colors */
+}
+```
+
+### Components
+All components are built with shadcn/ui and can be customized:
+
+```tsx
+<Button variant="outline" size="lg">
+  Custom Button
+</Button>
+```
+
+### Layout
+The layout is fully responsive and uses Tailwind's grid system:
+
+```tsx
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+  {/* Content */}
+</div>
+```
+
+## 🌙 Dark Mode
+
+Dark mode is fully supported with automatic theme switching:
+
+```css
+.dark {
+  --background: 222.2 84% 4.9%;
+  --foreground: 210 40% 98%;
+  /* ... dark colors */
+}
+```
+
+## 📱 Responsive Design
+
+- **Mobile**: Single column layout
+- **Tablet**: Two column grid
+- **Desktop**: Three column grid
+- **Large screens**: Optimized spacing
+
+## 🚀 Deployment
+
+### Vercel (Recommended)
+1. Push to GitHub
+2. Connect to Vercel
+3. Deploy automatically
+
+### Other Platforms
+- **Netlify**: Works out of the box
+- **Railway**: Easy deployment
+- **Docker**: Container ready
+
+## 📚 Learn More
+
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Tailwind CSS](https://tailwindcss.com/docs)
+- [shadcn/ui](https://ui.shadcn.com/)
+- [Radix UI](https://www.radix-ui.com/)
+- [Lucide Icons](https://lucide.dev/)
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Submit a pull request
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+---
+
+Built with ❤️ by [Drive Labs](https://drivelabs.dev)
+
+**Ready to build something amazing?** 🚀
