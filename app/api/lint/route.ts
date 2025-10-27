@@ -101,7 +101,13 @@ export async function POST(req: Request) {
         reject: false,
       });
       
-      const eslintOutput = eslintResult.exitCode === 0 ? [] : JSON.parse(eslintResult.stdout);
+      let eslintOutput = [];
+      try {
+        eslintOutput = eslintResult.exitCode === 0 ? [] : (eslintResult.stdout ? JSON.parse(eslintResult.stdout) : []);
+      } catch (e) {
+        eslintOutput = eslintResult.stdout ? [eslintResult.stdout] : [];
+      }
+      
       const prettierOutput = prettierResult.exitCode === 0 ? [] : prettierResult.stdout.split("\n").filter(Boolean);
       const tscOutput = tscResult.exitCode === 0 ? [] : tscResult.stdout.split("\n").filter(Boolean);
       

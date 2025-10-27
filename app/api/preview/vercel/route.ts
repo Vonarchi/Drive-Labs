@@ -37,9 +37,10 @@ export async function POST(req: Request) {
       }, { status: 400 });
     }
 
-    // Validate name
-    if (name && (name.length > 50 || !/^[a-zA-Z0-9\-_]+$/.test(name))) {
-      logSecurityEvent('invalid_deployment_name', { ip: clientIP, name });
+    // Validate name - sanitize if needed
+    const sanitizedName = name ? name.replace(/[^a-zA-Z0-9\-_]/g, '-').toLowerCase() : 'drive-labs-preview';
+    if (sanitizedName.length > 50 || !/^[a-zA-Z0-9\-_]+$/.test(sanitizedName)) {
+      logSecurityEvent('invalid_deployment_name', { ip: clientIP, name: sanitizedName });
       return NextResponse.json({ error: "Invalid deployment name" }, { status: 400 });
     }
 
@@ -47,7 +48,7 @@ export async function POST(req: Request) {
       endpoint: '/api/preview/vercel',
       clientIP,
       fileCount: fileArray.length,
-      name: name || 'drive-labs-preview',
+      name: sanitizedName || 'drive-labs-preview',
       msg: 'Vercel preview request received'
     });
 
@@ -58,7 +59,7 @@ export async function POST(req: Request) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: name || "drive-labs-preview",
+        name: sanitizedName || "drive-labs-preview",
         files,
         target: "preview",
         teamId: process.env.VERCEL_ORG_ID,
