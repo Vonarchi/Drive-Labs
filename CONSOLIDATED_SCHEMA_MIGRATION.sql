@@ -14,33 +14,26 @@
 
 -- Create jobs table
 CREATE TABLE IF NOT EXISTS jobs (
-  run_id text PRIMARY KEY,
-  project_spec jsonb,
-  owner_id uuid,
-  status text DEFAULT 'pending',
-  started_at timestamptz,
-  completed_at timestamptz,
-  error_message text,
-  created_at timestamptz DEFAULT now(),
-  updated_at timestamptz DEFAULT now()
+  run_id text,
+  created_at timestamptz DEFAULT now()
 );
 
--- Create job_events table
+-- Create job_events table (without foreign key for now)
 CREATE TABLE IF NOT EXISTS job_events (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-  run_id text NOT NULL,
-  bot_name text NOT NULL,
-  event_type text NOT NULL,
+  run_id text,
+  bot_name text,
+  event_type text,
   payload jsonb,
   owner_id uuid,
   created_at timestamptz DEFAULT now()
 );
 
--- Create artifacts table
+-- Create artifacts table (without foreign key for now)
 CREATE TABLE IF NOT EXISTS artifacts (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-  run_id text NOT NULL,
-  kind text NOT NULL,
+  run_id text,
+  kind text,
   url text,
   meta jsonb,
   owner_id uuid,
@@ -67,6 +60,12 @@ CREATE TABLE IF NOT EXISTS prompts (
 -- Add columns to jobs
 DO $$ 
 BEGIN
+    -- Add run_id if it doesn't exist and make it PRIMARY KEY
+    IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name = 'jobs' AND column_name = 'run_id') THEN
+        ALTER TABLE jobs ADD COLUMN run_id text;
+        CREATE UNIQUE INDEX IF NOT EXISTS jobs_run_id_unique ON jobs(run_id);
+    END IF;
+    
     IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name = 'jobs' AND column_name = 'owner_id') THEN
         ALTER TABLE jobs ADD COLUMN owner_id uuid;
     END IF;
