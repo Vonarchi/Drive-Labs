@@ -19,7 +19,7 @@ interface SpecEditorProps {
 }
 
 export function SpecEditor({ onSpecChange, onPreview, onDownload, onDeploy }: SpecEditorProps) {
-  const [spec, setSpec] = useState<Partial<TemplateInput>>({
+  const [spec, setSpec] = useState<TemplateInput>({
     name: "My Awesome App",
     description: "A modern web application",
     stack: "next-tailwind",
@@ -30,27 +30,48 @@ export function SpecEditor({ onSpecChange, onPreview, onDownload, onDeploy }: Sp
   })
 
   const [errors, setErrors] = useState<string[]>([])
-  const [isValid, setIsValid] = useState(false)
+  const [isValid, setIsValid] = useState(true)
   const [previewFiles, setPreviewFiles] = useState<Record<string, string>>({})
 
-  // Live validation
+  // Live validation - proper schema validation
   useEffect(() => {
     try {
-      const validated = TemplateInputZ.parse(spec)
-      setErrors([])
-      setIsValid(true)
-      onSpecChange(validated)
+      const validationResult = TemplateInputZ.safeParse(spec);
+      
+      if (validationResult.success) {
+        setIsValid(true);
+        setErrors([]);
+        onSpecChange(spec);
+      } else {
+        setIsValid(false);
+        setErrors(validationResult.error.errors.map(e => `${e.path.join('.')}: ${e.message}`));
+      }
     } catch (error: any) {
-      const errorMessages = error.errors?.map((e: any) => `${e.path.join('.')}: ${e.message}`) || [error.message]
-      setErrors(errorMessages)
-      setIsValid(false)
+      console.log('Error in onSpecChange:', error);
+      setIsValid(false);
+      setErrors([error.message || 'Validation error']);
     }
   }, [spec, onSpecChange])
 
   // Generate preview files
   useEffect(() => {
     if (isValid) {
-      generateFilesClient(spec as TemplateInput).then(setPreviewFiles)
+      try {
+        generateFilesClient(spec as TemplateInput)
+          .then(files => {
+            console.log('Generated preview files:', Object.keys(files).length, 'files');
+            setPreviewFiles(files);
+          })
+          .catch(error => {
+            console.error('Error generating preview files:', error);
+            setPreviewFiles({});
+          });
+      } catch (error) {
+        console.error('Error in generateFilesClient:', error);
+        setPreviewFiles({});
+      }
+    } else {
+      setPreviewFiles({});
     }
   }, [spec, isValid])
 

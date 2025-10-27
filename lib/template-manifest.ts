@@ -323,7 +323,7 @@ module.exports = nextConfig`
 │   ├── page.tsx
 │   └── globals.css
 <% for (const page of it.pages) { %>├── app<%= page.route === "/" ? "" : page.route %>/
-│   └── <%= page.route === "/" ? "page" : page.route.slice(1).replace(/\//g, "-") %>.tsx
+│   └── <%= page.route === "/" ? "page" : page.route.slice(1).split("/").join("-") %>.tsx
 <% } %>├── package.json
 ├── tailwind.config.ts
 ├── next.config.js

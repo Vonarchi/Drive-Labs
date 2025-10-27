@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { generateProjectFiles } from "@/lib/generator";
 import { TemplateInputZ } from "@/lib/schemas";
+import archiver from "archiver";
+import { Readable } from "stream";
 
 export const runtime = "nodejs";
 
@@ -10,15 +12,31 @@ export async function POST(req: Request) {
     const spec = TemplateInputZ.parse(body);
     const files = await generateProjectFiles(spec);
 
-    // Return files as JSON for now (ZIP streaming has issues in Next.js)
-    return NextResponse.json({
-      success: true,
-      fileCount: files.length,
-      files: files.map(f => ({ 
-        path: f.path, 
-        size: f.data.length,
-        content: f.data.substring(0, 200) + (f.data.length > 200 ? '...' : '')
-      }))
+    // Create ZIP file
+    const archive = archiver('zip', {
+      zlib: { level: 9 }
+    });
+
+    // Add files to archive
+    for (const file of files) {
+      archive.append(file.data, { name: file.path });
+    }
+
+    // Finalize the archive
+    await archive.finalize();
+
+    // Convert archive to buffer
+    const chunks: Buffer[] = [];
+    for await (const chunk of archive) {
+      chunks.push(chunk as Buffer);
+    }
+    const buffer = Buffer.concat(chunks);
+
+    return new NextResponse(buffer, {
+      headers: {
+        'Content-Type': 'application/zip',
+        'Content-Disposition': `attachment; filename="${spec.name}-starter.zip"`,
+      },
     });
 
   } catch (error) {

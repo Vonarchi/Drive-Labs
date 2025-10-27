@@ -229,13 +229,25 @@ export default function ClientDashboard() {
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-2">
-                <Button variant="outline" className="w-full justify-start cursor-pointer pointer-events-auto">
+                <Button 
+                  variant="outline" 
+                  className="w-full justify-start cursor-pointer pointer-events-auto"
+                  onClick={() => alert('Import Project feature coming soon!')}
+                >
                   Import Project
                 </Button>
-                <Button variant="outline" className="w-full justify-start cursor-pointer pointer-events-auto">
+                <Button 
+                  variant="outline" 
+                  className="w-full justify-start cursor-pointer pointer-events-auto"
+                  onClick={() => window.open('https://github.com/drive-labs/templates', '_blank')}
+                >
                   View Templates
                 </Button>
-                <Button variant="outline" className="w-full justify-start cursor-pointer pointer-events-auto">
+                <Button 
+                  variant="outline" 
+                  className="w-full justify-start cursor-pointer pointer-events-auto"
+                  onClick={() => alert('Settings page coming soon!')}
+                >
                   Settings
                 </Button>
               </CardContent>
@@ -249,13 +261,25 @@ export default function ClientDashboard() {
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-2">
-                <Button variant="outline" className="w-full justify-start cursor-pointer pointer-events-auto">
+                <Button 
+                  variant="outline" 
+                  className="w-full justify-start cursor-pointer pointer-events-auto"
+                  onClick={() => window.open('/docs', '_blank')}
+                >
                   Documentation
                 </Button>
-                <Button variant="outline" className="w-full justify-start cursor-pointer pointer-events-auto">
+                <Button 
+                  variant="outline" 
+                  className="w-full justify-start cursor-pointer pointer-events-auto"
+                  onClick={() => window.open('/examples', '_blank')}
+                >
                   Examples
                 </Button>
-                <Button variant="outline" className="w-full justify-start cursor-pointer pointer-events-auto">
+                <Button 
+                  variant="outline" 
+                  className="w-full justify-start cursor-pointer pointer-events-auto"
+                  onClick={() => window.open('mailto:support@drivelabs.ai', '_blank')}
+                >
                   Support
                 </Button>
               </CardContent>

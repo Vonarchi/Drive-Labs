@@ -1,8 +1,12 @@
 import { Eta } from "eta";
 import * as changeCase from "change-case";
-
-const eta = new Eta();
 import { TemplateInputZ } from "./schemas";
+
+const eta = new Eta({
+  views: ".", // dummy, not used for renderString
+  autoEscape: false,
+  autoTrim: false,
+});
 
 /**
  * Client-side file generation (simplified version of server-side generator)
