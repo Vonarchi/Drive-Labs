@@ -1,7 +1,18 @@
-node_modules
-dist
-tmp
-.env
+# build + caches
+node_modules/
+dist/
+tmp/
+*.log
+.DS_Store
 
+# env files — never commit secrets
+.env
+.env.*
+!.env.example
+
+# vercel local project files
 .vercel
-.env*.local
+.vercelignore
+
+# exports / bundles
+*.zip
