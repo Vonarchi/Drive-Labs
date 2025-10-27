@@ -229,13 +229,13 @@ export default function ClientDashboard() {
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-2">
-                <Button variant="outline" className="w-full justify-start">
+                <Button variant="outline" className="w-full justify-start cursor-pointer pointer-events-auto">
                   Import Project
                 </Button>
-                <Button variant="outline" className="w-full justify-start">
+                <Button variant="outline" className="w-full justify-start cursor-pointer pointer-events-auto">
                   View Templates
                 </Button>
-                <Button variant="outline" className="w-full justify-start">
+                <Button variant="outline" className="w-full justify-start cursor-pointer pointer-events-auto">
                   Settings
                 </Button>
               </CardContent>
@@ -249,13 +249,13 @@ export default function ClientDashboard() {
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-2">
-                <Button variant="outline" className="w-full justify-start">
+                <Button variant="outline" className="w-full justify-start cursor-pointer pointer-events-auto">
                   Documentation
                 </Button>
-                <Button variant="outline" className="w-full justify-start">
+                <Button variant="outline" className="w-full justify-start cursor-pointer pointer-events-auto">
                   Examples
                 </Button>
-                <Button variant="outline" className="w-full justify-start">
+                <Button variant="outline" className="w-full justify-start cursor-pointer pointer-events-auto">
                   Support
                 </Button>
               </CardContent>
