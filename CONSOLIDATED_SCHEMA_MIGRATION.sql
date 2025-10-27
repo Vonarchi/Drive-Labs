@@ -165,6 +165,9 @@ BEGIN
     IF NOT EXISTS (
         SELECT 1 FROM pg_constraint 
         WHERE conname = 'job_events_run_id_fkey'
+    ) AND EXISTS (
+        SELECT 1 FROM information_schema.columns 
+        WHERE table_name = 'jobs' AND column_name = 'run_id'
     ) THEN
         ALTER TABLE job_events 
         ADD CONSTRAINT job_events_run_id_fkey 
@@ -178,6 +181,9 @@ BEGIN
     IF NOT EXISTS (
         SELECT 1 FROM pg_constraint 
         WHERE conname = 'artifacts_run_id_fkey'
+    ) AND EXISTS (
+        SELECT 1 FROM information_schema.columns 
+        WHERE table_name = 'jobs' AND column_name = 'run_id'
     ) THEN
         ALTER TABLE artifacts 
         ADD CONSTRAINT artifacts_run_id_fkey 
