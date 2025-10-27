@@ -132,18 +132,51 @@ export default function ClientDashboard() {
     
     setIsCreating(true)
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000))
+      // Create a project spec from the form data
+      const spec: TemplateInput = {
+        name: projectName,
+        description: projectDescription,
+        stack: "next-tailwind",
+        features: [],
+        theme: {},
+        pages: [{ route: "/", purpose: "Homepage" }],
+        assets: []
+      }
       
-      // Show success message
-      alert(`Project "${projectName}" created successfully!`)
+      // Generate the project files
+      const files = await generateFilesClient(spec)
       
-      // Reset form and close dialog
-      setProjectName('')
-      setProjectDescription('')
-      setIsDialogOpen(false)
+      // Build the project as ZIP
+      const res = await fetch("/api/build", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(spec)
+      })
+
+      if (res.ok) {
+        const blob = await res.blob()
+        const url = URL.createObjectURL(blob)
+        const a = document.createElement("a")
+        a.href = url
+        a.download = `${projectName}-starter.zip`
+        document.body.appendChild(a)
+        a.click()
+        document.body.removeChild(a)
+        URL.revokeObjectURL(url)
+        
+        // Show success message
+        alert(`✅ Project "${projectName}" generated and downloaded successfully!`)
+        
+        // Reset form and close dialog
+        setProjectName('')
+        setProjectDescription('')
+        setIsDialogOpen(false)
+      } else {
+        alert("❌ Failed to generate project")
+      }
     } catch (error) {
       console.error('Failed to create project:', error)
+      alert(`❌ Error creating project: ${error instanceof Error ? error.message : 'Unknown error'}`)
     } finally {
       setIsCreating(false)
     }
