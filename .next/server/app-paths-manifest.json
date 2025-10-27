@@ -1,9 +1,3 @@
 {
-  "/_not-found": "app/_not-found.js",
-  "/api/generate-template/route": "app/api/generate-template/route.js",
-  "/api/preview/vercel/route": "app/api/preview/vercel/route.js",
-  "/page": "app/page.js",
-  "/dashboard/page": "app/dashboard/page.js",
-  "/api/lint/route": "app/api/lint/route.js",
-  "/api/build/route": "app/api/build/route.js"
+  "/api/generate-template/route": "app/api/generate-template/route.js"
 }

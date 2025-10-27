@@ -46,7 +46,7 @@
 │   ├── page.tsx
 │   └── globals.css
 <% for (const page of pages) { %>├── app<%= page.route === "/" ? "" : page.route %>/
-│   └── <%= page.route === "/" ? "page" : page.route.slice(1).replace(/\//g, "-") %>.tsx
+│   └── <%= page.route === "/" ? "page" : page.route.slice(1).split("/").join("-") %>.tsx
 <% } %><% if (features.includes("auth")) { %>├── components/
 │   └── auth/
 │       ├── login-form.tsx

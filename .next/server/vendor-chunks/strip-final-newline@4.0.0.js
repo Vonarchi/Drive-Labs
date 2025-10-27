@@ -1,0 +1,25 @@
+"use strict";
+/*
+ * ATTENTION: An "eval-source-map" devtool has been used.
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file with attached SourceMaps in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
+exports.id = "vendor-chunks/strip-final-newline@4.0.0";
+exports.ids = ["vendor-chunks/strip-final-newline@4.0.0"];
+exports.modules = {
+
+/***/ "(rsc)/./node_modules/.pnpm/strip-final-newline@4.0.0/node_modules/strip-final-newline/index.js":
+/*!************************************************************************************************!*\
+  !*** ./node_modules/.pnpm/strip-final-newline@4.0.0/node_modules/strip-final-newline/index.js ***!
+  \************************************************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ stripFinalNewline)\n/* harmony export */ });\nfunction stripFinalNewline(input) {\n    if (typeof input === \"string\") {\n        return stripFinalNewlineString(input);\n    }\n    if (!(ArrayBuffer.isView(input) && input.BYTES_PER_ELEMENT === 1)) {\n        throw new Error(\"Input must be a string or a Uint8Array\");\n    }\n    return stripFinalNewlineBinary(input);\n}\nconst stripFinalNewlineString = (input)=>input.at(-1) === LF ? input.slice(0, input.at(-2) === CR ? -2 : -1) : input;\nconst stripFinalNewlineBinary = (input)=>input.at(-1) === LF_BINARY ? input.subarray(0, input.at(-2) === CR_BINARY ? -2 : -1) : input;\nconst LF = \"\\n\";\nconst LF_BINARY = LF.codePointAt(0);\nconst CR = \"\\r\";\nconst CR_BINARY = CR.codePointAt(0);\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKHJzYykvLi9ub2RlX21vZHVsZXMvLnBucG0vc3RyaXAtZmluYWwtbmV3bGluZUA0LjAuMC9ub2RlX21vZHVsZXMvc3RyaXAtZmluYWwtbmV3bGluZS9pbmRleC5qcyIsIm1hcHBpbmdzIjoiOzs7O0FBQWUsU0FBU0Esa0JBQWtCQyxLQUFLO0lBQzlDLElBQUksT0FBT0EsVUFBVSxVQUFVO1FBQzlCLE9BQU9DLHdCQUF3QkQ7SUFDaEM7SUFFQSxJQUFJLENBQUVFLENBQUFBLFlBQVlDLE1BQU0sQ0FBQ0gsVUFBVUEsTUFBTUksaUJBQWlCLEtBQUssSUFBSTtRQUNsRSxNQUFNLElBQUlDLE1BQU07SUFDakI7SUFFQSxPQUFPQyx3QkFBd0JOO0FBQ2hDO0FBRUEsTUFBTUMsMEJBQTBCRCxDQUFBQSxRQUMvQkEsTUFBTU8sRUFBRSxDQUFDLENBQUMsT0FBT0MsS0FDZFIsTUFBTVMsS0FBSyxDQUFDLEdBQUdULE1BQU1PLEVBQUUsQ0FBQyxDQUFDLE9BQU9HLEtBQUssQ0FBQyxJQUFJLENBQUMsS0FDM0NWO0FBRUosTUFBTU0sMEJBQTBCTixDQUFBQSxRQUMvQkEsTUFBTU8sRUFBRSxDQUFDLENBQUMsT0FBT0ksWUFDZFgsTUFBTVksUUFBUSxDQUFDLEdBQUdaLE1BQU1PLEVBQUUsQ0FBQyxDQUFDLE9BQU9NLFlBQVksQ0FBQyxJQUFJLENBQUMsS0FDckRiO0FBRUosTUFBTVEsS0FBSztBQUNYLE1BQU1HLFlBQVlILEdBQUdNLFdBQVcsQ0FBQztBQUNqQyxNQUFNSixLQUFLO0FBQ1gsTUFBTUcsWUFBWUgsR0FBR0ksV0FBVyxDQUFDIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vZHJpdmUtbGFicy1vcmNoZXN0cmF0b3IvLi9ub2RlX21vZHVsZXMvLnBucG0vc3RyaXAtZmluYWwtbmV3bGluZUA0LjAuMC9ub2RlX21vZHVsZXMvc3RyaXAtZmluYWwtbmV3bGluZS9pbmRleC5qcz9mMTM1Il0sInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCBkZWZhdWx0IGZ1bmN0aW9uIHN0cmlwRmluYWxOZXdsaW5lKGlucHV0KSB7XG5cdGlmICh0eXBlb2YgaW5wdXQgPT09ICdzdHJpbmcnKSB7XG5cdFx0cmV0dXJuIHN0cmlwRmluYWxOZXdsaW5lU3RyaW5nKGlucHV0KTtcblx0fVxuXG5cdGlmICghKEFycmF5QnVmZmVyLmlzVmlldyhpbnB1dCkgJiYgaW5wdXQuQllURVNfUEVSX0VMRU1FTlQgPT09IDEpKSB7XG5cdFx0dGhyb3cgbmV3IEVycm9yKCdJbnB1dCBtdXN0IGJlIGEgc3RyaW5nIG9yIGEgVWludDhBcnJheScpO1xuXHR9XG5cblx0cmV0dXJuIHN0cmlwRmluYWxOZXdsaW5lQmluYXJ5KGlucHV0KTtcbn1cblxuY29uc3Qgc3RyaXBGaW5hbE5ld2xpbmVTdHJpbmcgPSBpbnB1dCA9PlxuXHRpbnB1dC5hdCgtMSkgPT09IExGXG5cdFx0PyBpbnB1dC5zbGljZSgwLCBpbnB1dC5hdCgtMikgPT09IENSID8gLTIgOiAtMSlcblx0XHQ6IGlucHV0O1xuXG5jb25zdCBzdHJpcEZpbmFsTmV3bGluZUJpbmFyeSA9IGlucHV0ID0+XG5cdGlucHV0LmF0KC0xKSA9PT0gTEZfQklOQVJZXG5cdFx0PyBpbnB1dC5zdWJhcnJheSgwLCBpbnB1dC5hdCgtMikgPT09IENSX0JJTkFSWSA/IC0yIDogLTEpXG5cdFx0OiBpbnB1dDtcblxuY29uc3QgTEYgPSAnXFxuJztcbmNvbnN0IExGX0JJTkFSWSA9IExGLmNvZGVQb2ludEF0KDApO1xuY29uc3QgQ1IgPSAnXFxyJztcbmNvbnN0IENSX0JJTkFSWSA9IENSLmNvZGVQb2ludEF0KDApO1xuIl0sIm5hbWVzIjpbInN0cmlwRmluYWxOZXdsaW5lIiwiaW5wdXQiLCJzdHJpcEZpbmFsTmV3bGluZVN0cmluZyIsIkFycmF5QnVmZmVyIiwiaXNWaWV3IiwiQllURVNfUEVSX0VMRU1FTlQiLCJFcnJvciIsInN0cmlwRmluYWxOZXdsaW5lQmluYXJ5IiwiYXQiLCJMRiIsInNsaWNlIiwiQ1IiLCJMRl9CSU5BUlkiLCJzdWJhcnJheSIsIkNSX0JJTkFSWSIsImNvZGVQb2ludEF0Il0sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///(rsc)/./node_modules/.pnpm/strip-final-newline@4.0.0/node_modules/strip-final-newline/index.js\n");
+
+/***/ })
+
+};
+;
